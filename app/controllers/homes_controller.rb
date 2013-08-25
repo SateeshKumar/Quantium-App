@@ -5,7 +5,12 @@ class HomesController < ApplicationController
   include RottenTomatoes
   def index
     Rotten.api_key = "9zumcg5xarr8nw3urcz6gj69"
-    @movie = RottenList.find(:type => "in_theaters")
+	@type_movie=params[:type_path]
+	if(params[:type_path]==nil)
+		@movie = RottenList.find(:type => "in_theaters")
+	else
+		@movie = RottenList.find(:type => params[:type_path])
+	end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @productts }
