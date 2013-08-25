@@ -1,0 +1,39 @@
+
+<script type="text/javascript">
+	function searchFunction()
+	{
+		var search=document.getElementById('search').value;
+		jQuery.ajax({
+          	url: "/homes/search?search="+search,
+		     	type: "GET",
+           	success: function(result){  
+                alert(result); 	
+            },
+            error: function(){
+                  alert('Error occured');
+            }
+      });
+	}
+</script>
+
+<div class="row">
+  <div class="span2 offset9">
+	<table><tr><td>
+    <input type="text" class="search-query" placeholder="Search" name="search" id="search"></td><td>    
+	<a href="javascript:void(0)" onclick="searchFunction()" class="btn btn-primary">Search</a></td></tr></table>
+  </div>
+</div>
+<div class="row">
+  <div class="span12">
+    <ul class="thumbnails">
+    <% for movie in @movie %>
+      <li class="span2" style="border:0px;">
+        <div class="thumbnail" style="width:140px;height:200px;">
+          <%= link_to image_tag(movie.posters.profile, :border=>0, :class => 'dock-item'),:action=>"show",:id=>movie.id %>
+          <h5><%= movie.title %> </h5>
+        </div>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+</div>

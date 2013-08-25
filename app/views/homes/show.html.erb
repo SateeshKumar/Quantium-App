@@ -1,0 +1,38 @@
+<div class="container" style="">
+  <div class="row">
+    <div class="span7 offset1">
+      <table>
+        <tr>
+        <td valign="top" style="font-weight:bold;">Title</td><td><%= @movie.title %></td></tr>
+        <td valign="top" style="font-weight:bold;">Rating</td><td><%= @movie.ratings.audience_score.to_s %></td></tr><tr>
+        <td valign="top" style="font-weight:bold;">Genre</td><td><%= @movie.genres.to_a[0] %></td></tr><tr>
+		<td valign="top" style="font-weight:bold;">Reviews</td><td><%= @movie.ratings.critics_score %></td></tr><tr>
+		<% trailer=@movie.links.alternate+'trailer' %>
+		<td valign="top" style="font-weight:bold;">Trailer</td><td><a href="javascript:void(0)" onClick="window.open('<%= trailer %>','','width=500,height=300')" style="text-decoration:none;font-weight:bold;">Click Here</a></td></tr><tr>
+        <td valign="top" style="font-weight:bold;">Cast</td><td><% result= cast(@movie.links.cast+"?apikey=9zumcg5xarr8nw3urcz6gj69") %>
+          <% result.each { |key,value| %>
+              <%  result[key].each { |name,v | %>
+                <%=  name["name"].to_s %><br/>
+              <%  } %>
+              <% } %>
+         </td>
+      </tr>
+	  <tr>
+        <td valign="top" style="font-weight:bold;">Description</td><td><%= @movie.synopsis %></td></tr><tr>
+    </table>
+    </div>
+    <div class="span4">
+		
+    	<%= image_tag(@movie.posters.original) %>
+		
+    </div>
+  </div>
+  <div class="row">
+	<div class="span3 offset1" style="font-weight:bold;">Comments</div>
+  </div>
+  <div class="row" name="update-container">
+  	<div class="span4 offset1">
+	  	<%= render :partial => "comments/form" %>
+	</div>
+  </div>
+</div>

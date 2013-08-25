@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rails3Bootstrapapp1</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  
+  <%= csrf_meta_tags %>
+</head>
+<body style="background-color:#E5E4E2;">
+	<div class="row" style="background-color:#B6B6B4;">
+  		<div class="span3">
+    		<h1 align="center">Now Showing</h1>
+  		</div>
+  		<div class="span3 offset6" style="color:white;">
+    		<ul class="nav nav-pills" style="margin:0px;padding:0px;">
+  				<li class="disabled"><h5><%= link_to 'Home', homes_path %></h5></a></li>
+  			</ul>
+  		</div>
+	</div>
+
+	<div class="row">
+  		<div class="span12">
+    		<%= yield %>
+  		</div>
+	</div>
+</body>
+</html>
