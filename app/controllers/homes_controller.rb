@@ -7,7 +7,7 @@ class HomesController < ApplicationController
     Rotten.api_key = "9zumcg5xarr8nw3urcz6gj69"
 	@type_movie=params[:type_path]
 	@search=params[:search]
-	if(params[:type_path]==nil)
+	if(params[:type_path]==nil || params[:type_path].empty?)
 		@movie = RottenList.find(:type => "in_theaters")
 	else
 		@movie = RottenList.find(:type => params[:type_path])
