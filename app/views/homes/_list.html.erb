@@ -1,0 +1,29 @@
+<% if(!@search.nil?) %>
+	<div class="span12">
+		<ul class="thumbnails">
+		<% for movie in @movie %>
+			<% if(movie.title.upcase.include?(@search.upcase)) %>
+				<li class="span2" style="border:0px;">		
+					<div class="thumbnail" style="width:140px;height:200px;">
+						<%= link_to image_tag(movie.posters.profile, :border=>0, :class => 'dock-item'),:action=>"show",:id=>movie.id %>
+						<h5><%= movie.title %> </h5>
+					</div>
+				</li>
+			<% end %>	
+		<% end %>
+		</ul>
+	</div>
+<% else %>
+	<div class="span12">
+		<ul class="thumbnails">
+		<% for movie in @movie %>
+		  <li class="span2" style="border:0px;">
+			<div class="thumbnail" style="width:140px;height:200px;">
+			  <%= link_to image_tag(movie.posters.profile, :border=>0, :class => 'dock-item'),:action=>"show",:id=>movie.id %>
+			  <h5><%= movie.title %> </h5>
+			</div>
+		  </li>
+		<% end %>
+		</ul>
+	</div>
+<% end %>

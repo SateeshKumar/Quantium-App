@@ -4,10 +4,10 @@
 	{
 		var search=document.getElementById('search').value;
 		jQuery.ajax({
-          	url: "/homes/search?search="+search,
+          	url: "/homes?search="+search+"&type_path=<%= @type_movie %>",
 		     	type: "GET",
            	success: function(result){  
-                alert(result); 	
+                jQuery("#movies_list").html(result); 	
             },
             error: function(){
                   alert('Error occured');
@@ -23,17 +23,6 @@
 	<a href="javascript:void(0)" onclick="searchFunction()" class="btn btn-primary">Search</a></td></tr></table>
   </div>
 </div>
-<div class="row">
-  <div class="span12">
-    <ul class="thumbnails">
-    <% for movie in @movie %>
-      <li class="span2" style="border:0px;">
-        <div class="thumbnail" style="width:140px;height:200px;">
-          <%= link_to image_tag(movie.posters.profile, :border=>0, :class => 'dock-item'),:action=>"show",:id=>movie.id %>
-          <h5><%= movie.title %> </h5>
-        </div>
-      </li>
-    <% end %>
-    </ul>
-  </div>
+<div class="row" id="movies_list">
+	<%= render :partial => "list" %>
 </div>

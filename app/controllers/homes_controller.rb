@@ -6,15 +6,15 @@ class HomesController < ApplicationController
   def index
     Rotten.api_key = "9zumcg5xarr8nw3urcz6gj69"
 	@type_movie=params[:type_path]
+	@search=params[:search]
 	if(params[:type_path]==nil)
 		@movie = RottenList.find(:type => "in_theaters")
 	else
 		@movie = RottenList.find(:type => params[:type_path])
 	end
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @productts }
-    end
+	if(!@search.nil?)
+		render :partial=>"list"
+	end
   end
 
   # GET /productts/1
@@ -26,9 +26,6 @@ class HomesController < ApplicationController
 	@comments = Comment.find_all_by_movie_id(params[:id])
   end
   
-  def search
-	render :text=>"test"
-  end
   # GET /homes/new
   # GET /homes/new.json
   def new
