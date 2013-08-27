@@ -21,14 +21,9 @@ class HomesController < ApplicationController
   # GET /productts/1.json
   def show
     Rotten.api_key = "9zumcg5xarr8nw3urcz6gj69"
-	if(params[:search]!=nil)
-		@movie = RottenList.find(:type => "upcoming",:title=>params[:search])
-	else
-	    @movie = RottenMovie.find(:id => params[:id]) #params[:id]) #RottenList.find(:id=>771267761)
-		@comment = Comment.new
-		@comment.movie_id = params[:id]
-		@comments = Comment.find_all_by_movie_id(params[:id])
-	end
+    @movie = RottenMovie.find(:id => params[:id]) #params[:id]) #RottenList.find(:id=>771267761)
+	@movie_id = params[:id]
+	@comments = Comment.find_all_by_movie_id(params[:id])
   end
   
   def search
@@ -54,7 +49,6 @@ class HomesController < ApplicationController
   # POST /homes.json
   def create
     @home = Home.new(params[:home])
-
     respond_to do |format|
       if @home.save
         format.html { redirect_to @home, notice: 'Home was successfully created.' }

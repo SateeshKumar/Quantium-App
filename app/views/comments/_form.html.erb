@@ -1,23 +1,12 @@
 <table class="table table-condensed">
   <% for comment in @comments %>
-    <tr><td><%= comment.name %><br/> <%= comment.comment %></td></tr>
+    <tr><td><%= comment.name %>&nbsp;&nbsp;&nbsp;&nbsp;<%= comment.created_at.strftime("%d-%m-%Y %H:%M") %>    <br/> <%= comment.comment %></td></tr>
   <% end %>
 </table>
 
 
-<%= form_for(@comment, :remote => true,:'data-update-target' => 'update-container') do |f| %>
-  <% if @comment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-
-      <ul>
-      <% @comment.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <%= f.hidden_field :movie_id%>
+<%= form_for(Comment.new, :remote => true) do |f| %>
+  <%= f.hidden_field :movie_id,:value=>@movie_id%>
   <div class="field">
     <%= f.label :name %>
     <%= f.text_field :name %>

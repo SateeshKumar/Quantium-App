@@ -1,0 +1,10 @@
+<% if @comment.errors.any? -%> 
+	<% str='' %>
+	<% @comment.errors.each do |msg| %>
+		<% str = str+msg.to_s+" con not be blank; " %>
+  <% end %>
+	alert("<%= str %>");
+<% else %>
+	$("#comments").html("<%= escape_javascript(render(:partial => 'form')) %>");
+<% end %>
+
